@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Live Website
 
-To try this app, this is the [Live website](businesscontacts-b8900.firebaseapp.com)
+To try this app, this is the [Live website](https://businesscontacts-b8900.firebaseapp.com)
 
 ## Development server
 
