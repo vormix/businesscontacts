@@ -5,12 +5,12 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "__apiKey__",
-    authDomain: "__authDomain__",
-    databaseURL: "__databaseURL__",
-    projectId: "__projectId__",
-    storageBucket: "__storageBucket__",
-    messagingSenderId: "__messagingSenderId__"
+    apiKey: "AIzaSyCuBGiJ0pDygYGuFfWflXYE-X0qBLRNbhk",
+    authDomain: "businesscontacts-b8900.firebaseapp.com",
+    databaseURL: "https://businesscontacts-b8900.firebaseio.com",
+    projectId: "businesscontacts-b8900",
+    storageBucket: "businesscontacts-b8900.appspot.com",
+    messagingSenderId: "635933898234"
   }
 };
 

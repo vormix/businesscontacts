@@ -1,20 +1,184 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<nav>
+  <div class="nav-wrapper grey lighten-1">
+    <a href="#" class="brand-logo center">BusinessContacts</a>
+  </div>
+</nav>
 
+<br>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col m6">
+      <button (click)="changeState('add')" class="waves-effect waves-light btn-small grey">Add Business</button>
+    </div>
+    <div class="col m6">
+      <select (change)="filterCategory(filteredCategory.value)" #filteredCategory style="display:block">
+        <option value="0" selected="selected">- Category -</option>
+        <option *ngFor="let c of categories" [value]="c.name">{{ c.name }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- ADD  Form -->
+  <div *ngIf="appState == 'add'">
+    <div class="row">
+      <div class="col s12">
+        <h3>Add Business</h3>
+        <form (submit)="addBusiness(f.value)" #f="ngForm">
+          <div class="row">
+
+            <div class="input-field col s6">
+              <input placeholder="Company" name="company" ngModel id="company" type="text">
+            </div>
+            <div class="input-field col s6">
+              <input placeholder="Description" name="description" ngModel id="description" type="text">
+            </div>
+            <div class="input-field col s6">
+              <select name="category" ngModel id="category" style="display:block">
+                <option value="0" selected>- Category -</option>
+                <option *ngFor="let c of categories" [value]="c.name">{{ c.name }}</option>
+              </select>
+            </div>
+            <div class="input-field col s6">
+              <input placeholder="Years in Business" name="years_in_business" ngModel id="years_in_business"
+                type="number">
+            </div>
+            <div class="input-field col s6">
+              <input placeholder="Street" name="street_address" ngModel id="street_address" type="text">
+            </div>
+            <div class="input-field col s6">
+              <input placeholder="City" name="city" ngModel id="city" type="text">
+            </div>
+            <div class="input-field col s6">
+              <input placeholder="State" name="state" ngModel id="state" type="text">
+            </div>
+            <div class="input-field col s6">
+              <input placeholder="Zip Code" name="zipcode" ngModel id="zipcode" type="text">
+            </div>
+            <div class="input-field col s6">
+              <input placeholder="Phone" name="phone" ngModel id="phone" type="text">
+            </div>
+            <div class="input-field col s6">
+              <input placeholder="Email" name="email" ngModel id="email" type="text">
+            </div>
+          </div>
+
+          <button class="waves-effect waves-light btn-small blue">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT  Form -->
+  <div *ngIf="appState == 'edit'">
+      <div class="row">
+        <div class="col s12">
+          <h3>Add Business</h3>
+          <form (submit)="updateBusiness()">
+            <div class="row">
+  
+              <div class="input-field col s6">
+                <input placeholder="Company" [(ngModel)]="activeBusiness.company" name="activeBusiness.company" type="text">
+              </div>
+              <div class="input-field col s6">
+                <input placeholder="Description" [(ngModel)]="activeBusiness.description" name="activeBusiness.description" type="text">
+              </div>
+              <div class="input-field col s6">
+                <select [(ngModel)]="activeBusiness.category" name="activeBusiness.category" style="display:block">
+                  <option value="0" selected>- Category -</option>
+                  <option *ngFor="let c of categories" [value]="c.name">{{ c.name }}</option>
+                </select>
+              </div>
+              <div class="input-field col s6">
+                <input placeholder="Years in Business" [(ngModel)]="activeBusiness.years_in_business" name="activeBusiness.years_in_business"
+                  type="number">
+              </div>
+              <div class="input-field col s6">
+                <input placeholder="Street" [(ngModel)]="activeBusiness.street_address" name="activeBusiness.street_address" type="text">
+              </div>
+              <div class="input-field col s6">
+                <input placeholder="City" [(ngModel)]="activeBusiness.city" name="activeBusiness.city" type="text">
+              </div>
+              <div class="input-field col s6">
+                <input placeholder="State" [(ngModel)]="activeBusiness.state" name="activeBusiness.state" type="text">
+              </div>
+              <div class="input-field col s6">
+                <input placeholder="Zip Code" [(ngModel)]="activeBusiness.zipcode" name="activeBusiness.zipcode" type="text">
+              </div>
+              <div class="input-field col s6">
+                <input placeholder="Phone" [(ngModel)]="activeBusiness.phone" name="activeBusiness.phone" type="text">
+              </div>
+              <div class="input-field col s6">
+                <input placeholder="Email" [(ngModel)]="activeBusiness.email" name="activeBusiness.email" type="text">
+              </div>
+            </div>
+  
+            <button class="waves-effect waves-light btn-small blue">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  <div *ngIf="appState == 'extend'">
+    <div class="row">
+      <div class="col 12">
+        <button (click)="changeState('default')" class="waves-effect waves-light btn-small grey">Go Back</button>
+      </div>
+    </div>
+
+    <div *ngFor="let b of businesses">
+      <div *ngIf="b.$key == activeKey">
+        <div class="row">
+          <div class="col m7">
+            <h3>{{ b.company }}</h3>
+            <p>Category: {{ b.category }}</p>
+            <p>Years in Business: {{ b.years_in_business }}</p>
+            <p>{{ b.description }}</p>
+          </div>
+          <div class="col m5">
+            <h4>Contact Info</h4>
+            <ul>
+              <li>Phone: {{ b.phone }}</li>
+              <li>Email: {{ b.email }}</li>
+              <li>Street: {{ b.street_address }}</li>
+              <li>City: {{ b.city }}</li>
+              <li>State: {{ b.state }}</li>
+              <li>Zipcode: {{ b.zipcode }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s12">
+      <table *ngIf="businesses" class="striped">
+        <thead>
+          <tr>
+            <th class="center-align">Company</th>
+            <th class="center-align">Category</th>
+            <th class="center-align">Phone</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let b of businesses">
+            <td class="center-align">{{ b.company }}</td>
+            <td class="center-align">{{ b.category }}</td>
+            <td class="center-align">{{ b.phone }}</td>
+            <td class="right-align">
+              <button (click)="changeState('extend', b.$key)"
+                class="waves-effect waves-light btn-small blue">More</button>
+              <button (click)="showEdit(b)"
+                class="waves-effect waves-light btn-small grey">Edit</button>
+              <button (click)="deleteBusiness(b.$key)"
+                class="waves-effect waves-light btn-small red">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
